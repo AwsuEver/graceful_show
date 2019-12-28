@@ -1,0 +1,18 @@
+body html{
+	margin: 0;
+	padding: 0;
+}
+#lottery{
+	width: 200px;
+	height: 100px;
+	margin: 0 auto;
+	border: 1px solid gray;
+	line-height: 100px;
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+}
+#mycanvas{
+	display: block;
+	margin: -101px auto;
+}

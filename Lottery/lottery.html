@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>刮奖</title>
+	<link rel="stylesheet" href="lottery.css">
+</head>
+<body>
+	<div id="lottery"></div>
+	<canvas id="mycanvas"></canvas>
+</body>
+</html>
+
+<script>
+	
+	var lottery = document.getElementById('lottery');
+	var canvas = document.getElementById('mycanvas');
+	var ctx = canvas.getContext("2d");
+
+	init();
+
+	// 初始化函数
+	function init(){
+		var prise = setPrise();
+		getPrise(prise);
+		initCanvas();
+		scrape();
+	}
+
+	// 设置初始化值
+	function setPrise(){
+		var priseArr = ['100元','100元','100元','200元','200元','400元','谢谢','谢谢','谢谢','谢谢','谢谢','谢谢'];
+		var priseNum = Math.floor(Math.random()*12);
+		return priseArr[priseNum];
+	}
+
+	// 获取奖品值
+	function getPrise(prise){
+		lottery.innerText = prise;
+	}
+
+	// 初始化canvas
+	function initCanvas(){
+		canvas.width = 200;
+		canvas.height = 100;
+		ctx.fillStyle = "gray";
+		ctx.fillRect(0,0,200,100);
+	}
+
+	function scrape(){
+		canvas.onmousedown = function(e){
+			var x = e.offsetX;
+			var y = e.offsetY;
+
+			ctx.moveTo(x,y);
+
+			canvas.onmousemove = function(e){
+				var moveX = e.offsetX;
+				var moveY = e.offsetY;
+
+				ctx.lineTo(moveX,moveY);
+				ctx.lineWidth = 10;
+				ctx.globalCompositeOperation = 'destination-out';
+				ctx.stroke();
+			}
+		}
+		canvas.onmouseup = function(){
+			canvas.onmousemove = null;
+		}
+	}
+
+</script>
